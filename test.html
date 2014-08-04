@@ -1,0 +1,171 @@
+<html>
+    <head>
+        <script type="text/javascript" src="ate.js"></script>
+        <script type="text/javascript" src="ate.filters.js"></script>
+        <script type="text/javascript" src="qunit/qunit.js"></script>
+        <link rel="stylesheet" href="qunit/qunit.css">
+        <title>ate.js test</title>
+    </head>
+
+    <body>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+
+
+        <script type="text/javascript">
+            test('Test single replace', function() {
+                var template = '{{test}}',
+                    data = {test:'TEST'},
+                    expected = 'TEST'
+                ;
+
+                equal(ate.render(template, data), expected);
+            });
+
+            test('Test with space', function() {
+                    var template = '{{   test }} is {{test          }}',
+                    data = {test:'TEST'},
+                    expected = 'TEST is TEST'
+                ;
+
+                equal(template.render(data), expected);
+            });
+
+            test('Test multi replace', function() {
+                var template = 'test is {{test}}, value is {{value}}',
+                    data = {test:'TEST', value:'VALUE'},
+                    expected = 'test is TEST, value is VALUE'
+                ;
+
+                equal(template.render(data), expected);
+            });
+            test('Test with value as function', function() {
+                var template = 'test is {{test}}',
+                    data = {test: function() { return 'value' }},
+                    expected = 'test is value'
+                ;
+
+                equal(template.render(data), expected);
+            });
+            test('Test with unknown value', function() {
+                var template = 'test is {{test}}',
+                    data = {},
+                    expected = 'test is {{test}}'
+                ;
+
+                equal(template.render(data), expected);
+            });
+
+            test('Test with array', function() {
+                var template = 'value is {{0}}, value is {{1}}',
+                    data = ['TEST','VALUE'],
+                    expected = 'value is TEST, value is VALUE'
+                ;
+
+                equal(template.render(data), expected);
+            });
+            test('Test with dot notation', function(){
+                    var template = '{{one.id}} {{one.0}} {{two.wew}} {{fn.id}}',
+                    data = {one:{id:'satu',en:'one'}, two:'dua', fn: {id:function(){return 'fn';}}},
+                    expected = 'satu {{one.0}} {{two.wew}} fn'
+                ;
+
+                equal(template.render(data), expected);
+            });
+
+            test('Test with data string. ', function() {
+                var template = '{{upper}}',
+                    data = 'upper',
+                    expected = '{{upper}}'
+                ;
+
+                equal(template.render(data), expected);
+            });
+
+            test('Filter test "upper"', function() {
+                var template = 'value is {{value|upper}}',
+                    data = {value:'VALUE'},
+                    expected = 'value is VALUE'
+                ;
+
+                equal(template.render(data), expected);
+            });
+
+            test('Filter test "lower"', function() {
+                var template = 'value is {{value|lower}}',
+                    data = {value:'VALUE'},
+                    expected = 'value is value'
+                ;
+
+                equal(template.render(data), expected);
+            });
+
+            test('Filter test "i" (ignore)', function() {
+                var template = 'value is {{angular|i}}',
+                    data = {},
+                    expected = 'value is {{angular}}'
+                ;
+
+                equal(template.render(data), expected);
+            });
+
+            test('Filter test "ternary"', function() {
+                var template = '{{yes|ternary ini yes,ini no}},{{no|ternary ini yes,ini no}}',
+                    data = {yes:true,no:false},
+                    expected = 'ini yes,ini no'
+                ;
+
+                equal(template.render(data), expected);
+            });
+
+            test('Filter test "each" array', function() {
+                var template = '{{data|each loop=:key, val=:value }}',
+                    data = {data:['val1', 'val2']},
+                    expected = 'loop=0, val=val1 loop=1, val=val2 '
+                ;
+
+                equal(template.render(data), expected);
+            });
+            test('Filter test "each" object', function() {
+                var template = '{{data|each :key = :value }}',
+                data = {data:{'val1':'value1', 'val2':'value2'}},
+                    expected = 'val1 = value1 val2 = value2 '
+                ;
+
+                equal(template.render(data), expected);
+            });
+            test('Filter test "each" array contains object', function() {
+                var template = '{{data|each :loop = :val0 }}',
+                data = {data:[{'val0':'value1'},{'val0':'value2'}]},
+                    expected = '0 = value1 1 = value2 '
+                ;
+
+                equal(template.render(data), expected);
+            });
+            test('Filter test "each" array contains object with function', function() {
+                var template = '{{data|each :loop = :val0 }}',
+                data = {data:[{'val0':function(){return 'value1'}},{'val0':'value2'}]},
+                    expected = '0 = value1 1 = value2 '
+                ;
+
+                equal(template.render(data), expected);
+            });
+            test('Filter test "sum"', function() {
+                var template = 'sum of value is {{data|sum value}}',
+                data = {data:[{value:1},{value:2},{value:0}]},
+                    expected = 'sum of value is 3'
+                ;
+
+                equal(template.render(data), expected);
+            })
+            test('Filter test "count"', function() {
+                var template = 'count of value is {{data|count value}}',
+                data = {data:[{value:1},{value:2},{ignore:0}]},
+                    expected = 'count of value is 2'
+                ;
+
+                equal(template.render(data), expected);
+            })
+        </script>
+    </body>
+</html>
