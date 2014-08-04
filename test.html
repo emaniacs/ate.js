@@ -28,7 +28,7 @@
                     expected = 'TEST is TEST'
                 ;
 
-                equal(template.render(data), expected);
+                equal(ate.render(template, data), expected);
             });
 
             test('Test multi replace', function() {
@@ -37,7 +37,7 @@
                     expected = 'test is TEST, value is VALUE'
                 ;
 
-                equal(template.render(data), expected);
+                equal(ate.render(template, data), expected);
             });
             test('Test with value as function', function() {
                 var template = 'test is {{test}}',
@@ -45,7 +45,7 @@
                     expected = 'test is value'
                 ;
 
-                equal(template.render(data), expected);
+                equal(ate.render(template, data), expected);
             });
             test('Test with unknown value', function() {
                 var template = 'test is {{test}}',
@@ -53,7 +53,7 @@
                     expected = 'test is {{test}}'
                 ;
 
-                equal(template.render(data), expected);
+                equal(ate.render(template, data), expected);
             });
 
             test('Test with array', function() {
@@ -62,7 +62,7 @@
                     expected = 'value is TEST, value is VALUE'
                 ;
 
-                equal(template.render(data), expected);
+                equal(ate.render(template, data), expected);
             });
             test('Test with dot notation', function(){
                     var template = '{{one.id}} {{one.0}} {{two.wew}} {{fn.id}}',
@@ -70,7 +70,7 @@
                     expected = 'satu {{one.0}} {{two.wew}} fn'
                 ;
 
-                equal(template.render(data), expected);
+                equal(ate.render(template, data), expected);
             });
 
             test('Test with data string. ', function() {
@@ -79,7 +79,7 @@
                     expected = '{{upper}}'
                 ;
 
-                equal(template.render(data), expected);
+                equal(ate.render(template, data), expected);
             });
 
             test('Filter test "upper"', function() {
@@ -88,7 +88,7 @@
                     expected = 'value is VALUE'
                 ;
 
-                equal(template.render(data), expected);
+                equal(ate.render(template, data), expected);
             });
 
             test('Filter test "lower"', function() {
@@ -97,7 +97,7 @@
                     expected = 'value is value'
                 ;
 
-                equal(template.render(data), expected);
+                equal(ate.render(template, data), expected);
             });
 
             test('Filter test "i" (ignore)', function() {
@@ -106,7 +106,7 @@
                     expected = 'value is {{angular}}'
                 ;
 
-                equal(template.render(data), expected);
+                equal(ate.render(template, data), expected);
             });
 
             test('Filter test "ternary"', function() {
@@ -115,7 +115,7 @@
                     expected = 'ini yes,ini no'
                 ;
 
-                equal(template.render(data), expected);
+                equal(ate.render(template, data), expected);
             });
 
             test('Filter test "each" array', function() {
@@ -124,7 +124,7 @@
                     expected = 'loop=0, val=val1 loop=1, val=val2 '
                 ;
 
-                equal(template.render(data), expected);
+                equal(ate.render(template, data), expected);
             });
             test('Filter test "each" object', function() {
                 var template = '{{data|each :key = :value }}',
@@ -132,7 +132,7 @@
                     expected = 'val1 = value1 val2 = value2 '
                 ;
 
-                equal(template.render(data), expected);
+                equal(ate.render(template, data), expected);
             });
             test('Filter test "each" array contains object', function() {
                 var template = '{{data|each :loop = :val0 }}',
@@ -140,7 +140,7 @@
                     expected = '0 = value1 1 = value2 '
                 ;
 
-                equal(template.render(data), expected);
+                equal(ate.render(template, data), expected);
             });
             test('Filter test "each" array contains object with function', function() {
                 var template = '{{data|each :loop = :val0 }}',
@@ -148,7 +148,7 @@
                     expected = '0 = value1 1 = value2 '
                 ;
 
-                equal(template.render(data), expected);
+                equal(ate.render(template, data), expected);
             });
             test('Filter test "sum"', function() {
                 var template = 'sum of value is {{data|sum value}}',
@@ -156,7 +156,7 @@
                     expected = 'sum of value is 3'
                 ;
 
-                equal(template.render(data), expected);
+                equal(ate.render(template, data), expected);
             })
             test('Filter test "count"', function() {
                 var template = 'count of value is {{data|count value}}',
@@ -164,7 +164,7 @@
                     expected = 'count of value is 2'
                 ;
 
-                equal(template.render(data), expected);
+                equal(ate.render(template, data), expected);
             })
         </script>
     </body>
