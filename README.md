@@ -22,7 +22,7 @@ var output = ate.render(template, data);
 ```js
 var template = 'one is "{{0}}", two is "{{1}}".';
 var data = ['satu', 'dua'];
-var output = template.render(data);
+var output = ate.render(template, data);
 ```
 
 ### Using dot notation on data
@@ -31,7 +31,7 @@ To display value of data from descendant context, use `.`.
 ```js
 var template = 'one in indonesian language is "{{one.idn}}"';
 var data = {one: {idn: 'satu', esp:'uno'}};
-var output = template.render(data);
+var output = ate.render(template, data);
 // output ->
 //    "one in indonesian language is "satu"
 ```
@@ -48,7 +48,7 @@ var data = {
         return date.toLocaleString();
     }
 };
-var output = template.render(data);
+var output = ate.render(template, data);
 ```
 
 In `fn` scope value of `this` is the entire of data which passed into `render`.
@@ -76,7 +76,7 @@ In a template filter can be used with append a `|` and name of filter.
 ```js
 var template = '{{one|upper}}';
 var data = {one:'satu'};
-var output = template.render(data);
+var output = ate.render(template, data);
 // output is SATU
 ```
 
@@ -86,7 +86,7 @@ var output = template.render(data);
 * **i** ignore the brackets.
 ```js
 var template = '{{ignore|i}}';
-var output = template.render();
+var output = ate.render(template);
 // output is "{{ignore}}"
 ```
 
@@ -94,7 +94,7 @@ var output = template.render();
 ```js
 var template = '{{word|length}}';
 var data = {word: 'four'};
-var output = template.render(data);
+var output = ate.render(template, data);
 // output is "4"
 ```
 * **lower** convert value into lowercase.
@@ -103,7 +103,7 @@ var output = template.render(data);
 ```js
 var template = '{{ok|ternary this is true,this is false}}';
 var data = {ok: true};
-var output = template.render(data);
+var output = ate.render(template, data);
   // output is "this is true"
 ```
 * **each** Loop based on value
@@ -112,7 +112,7 @@ var template = '{{words|each
                   <td>:idn</td><td>:esp</td>
                 }}'
 var data = {words: [{idn:'satu': esp:'uno'},{idn:'dua': esp:'dos'}]};
-var output = template.render(data);
+var output = ate.render(template, data);
 // output is "<td>satu</td><td>uno</td> <td>dua</td><td>dos</td>"
 ```
 
@@ -120,7 +120,7 @@ var output = template.render(data);
 ```js
 var template = 'Sum of value is {{data|sum value}}';
 var data = {data:[{no:1, value:5},{no:2, value:4}]};
-var output = template.render(data);
+var output = ate.render(template, data);
 // output is "Total value is 9"
 ```
 
@@ -128,7 +128,7 @@ var output = template.render(data);
 ```js
 var template = 'Count of value is {{data|count value}}';
 var data = {data:[{no:1, value:5},{no:2, value:4}]};
-var output = template.render(data);
+var output = ate.render(template, data);
 // output is "Total value is 2"
 ```
 
