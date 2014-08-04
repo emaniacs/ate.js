@@ -31,9 +31,7 @@
         // replace function
         E = function(tpl, data) {
             return tpl.replace(R, function(match, value, filter, index) {
-                var ret,
-                    val = e.get(data, value, match)
-                ;
+                var val = e.get(data, value, match);
 
                 return (typeof(F[filter]) === 'function')?
                         F[filter].call(val, index, value, match):
