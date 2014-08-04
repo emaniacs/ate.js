@@ -69,17 +69,11 @@
              * return the value or def
              */
             get: function(data, index, def) {
-                var def = def || undefined,
-                    d = index.split('.'),
-                    val = data;
-
-                // convert from laravel framework helper. (array_get)
-                for(var i=0; i<d.length; i++) {
-                    if (typeof(val) != 'object' || !val.hasOwnProperty(d[i]))
-                        return def;
-                    val = val[d[i]];
-                }
-                return val;
+                return index.split('.').reduce(function(obj, i){
+                    if ((typeof(obj) == 'object') && i in obj)
+                        return obj[i];
+                    return def
+                }, data);
             },
 
             /**
