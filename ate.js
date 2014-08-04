@@ -64,7 +64,7 @@
              */
             get: function(data, index, def) {
                 return index.split('.').reduce(function(obj, i){
-                    if ((typeof(obj) == 'object') && i in obj)
+                    if ((typeof(obj) === 'object') && obj.hasOwnProperty(i))
                         return obj[i];
                     return def
                 }, data);
