@@ -47,12 +47,6 @@
              * Wrapper to E (replace) function.
              */
             render: function(tpl, data) {
-                if (! data) {
-                    // called with String object.
-                    data = tpl;
-                    tpl = this;
-                }
-
                 return E(tpl, data)
             },
 
@@ -93,8 +87,4 @@
 
     // expose to global
     window.ate = e;
-
-    // add new method into string object.
-    String.prototype.render = e.render;
-
 })(window);
