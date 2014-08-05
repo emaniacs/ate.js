@@ -28,24 +28,20 @@
         // regex cui.
         R = /{{ *([\w\.]+)(?:\|([\w\.]+)(?:\s([^}]+)?)?)? *}}/gm,
 
-        // replace function
-        E = function(tpl, data) {
-            return tpl.replace(R, function(match, value, filter, index) {
-                var val = e.get(data, value, match);
-
-                return (typeof(F[filter]) === 'function')?
-                        F[filter].call(val, index, value, match):
-                    e.value.call(val, data, value, match)
-                ;
-            })
-        },
         // this is the ate
-        e = {
+        EE = {
             /**
              * Wrapper to E (replace) function.
              */
             render: function(tpl, data) {
-                return E(tpl, data)
+                return tpl.replace(R, function(match, value, filter, index) {
+                    var val = EE.get(data, value, match);
+
+                    return (typeof(F[filter]) === 'function')?
+                            F[filter].call(val, index, value, match):
+                        EE.value.call(val, data, value, match)
+                    ;
+                })
             },
 
             /**
@@ -84,5 +80,6 @@
     ;
 
     // expose to global
-    window.ate = e;
+    window.ate = EE;
+
 })(window);
