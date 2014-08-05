@@ -7,7 +7,7 @@
  * Advanced templating engine.
  * Example:
  *  <script type="text/javascript">
- *     var str = '<b>{{title}}</b> this is {{content}}. Date is {{date}}',
+ *     var template = '<b>{{title}}</b> this is {{content}}. Date is {{date}}',
  *       data = {
  *          title: 'This is title',
  *          content: 'Contents was here...',
@@ -16,7 +16,7 @@
  *              return date.toLocaleString();
  *          }
  *      };
- *     console.log(str.render(data))
+ *     console.log(ate.render(template, data))
  *  </script>
  */
 
