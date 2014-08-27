@@ -2,7 +2,7 @@ ate.filter('each', function(template) {
     var data = this,
         loop = 0,
         str = [],
-        regex = /(?::)(\w+)/gm
+        regex = /(?::)([\w.]+)/gm
     ;
     for(var key in data) {
         var context = data[key];

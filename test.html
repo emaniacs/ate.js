@@ -2,6 +2,7 @@
     <head>
         <script type="text/javascript" src="ate.js"></script>
         <script type="text/javascript" src="ate.filters.js"></script>
+        <script type="text/javascript" src="filters/each.js"></script>
         <script type="text/javascript" src="qunit/qunit.js"></script>
         <link rel="stylesheet" href="qunit/qunit.css">
         <title>ate.js test</title>
@@ -162,6 +163,14 @@
                 var template = 'count of value is {{data|count value}}',
                 data = {data:[{value:1},{value:2},{ignore:0}]},
                     expected = 'count of value is 2'
+                ;
+
+                equal(ate.render(template, data), expected);
+            })
+            test('Filter test "each" with dot support', function() {
+                var template = '{{data|each :age :name.first :name.last, }}',
+                data = {data:[{age:17 , name:{first:'1first',last:function(){return '1last'}}},{age:19, name:{first:'2first', last:'2last'}}]},
+                    expected = '17 1first 1last, 19 2first 2last, '
                 ;
 
                 equal(ate.render(template, data), expected);
