@@ -132,6 +132,8 @@ var output = ate.render(template, data);
 // output is "Total value is 2"
 ```
 
+There a amazing libraries can be used as filter in this page http://phpjs.org 
+
 License
 =======
 
